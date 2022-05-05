@@ -6,12 +6,22 @@ const { generarJWT } = require('../helpers/jwt');
 
 //Consultar usuario
 const getUsuarios = async (req, res) => {
+    
+    const desde = Number(req.query.desde) || 0; // se maneja una excepcion con || 0 por si no se le pone desde para la paginacion  
+   // Ambas promesas se ejecutan de manera simultanea 
+   const [ usuarios, total ] = await Promise.all([
+        Usuario  
+            .find({}, 'nombre email role google img') // se realiza un filtro para los campos que se quieren mostrar
+            .skip( desde ) // se utiliza para hacer la paginacion
+             .limit( 5 ), // limite para hacer la paginacion  en esta caso va de 5 
 
-    const usuarios = await Usuario.find({}, 'nombre email role google'); // se realiza un filtro para los campos que se quieren mostrar
+        Usuario.countDocuments()
+   ]);
 
     res.json({
         ok:true,
-        usuarios
+        usuarios,
+        total
     });
 
 }
