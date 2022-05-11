@@ -31,11 +31,17 @@
     );
     
     router.put('/:id',
-        [],
+        [
+            validarJWT,
+            check('nombre',' El nombre del médico es necesario').not().isEmpty(),
+            check('hospital',' El hospital id debe ser  valido').isMongoId(), // se puede utilizar para validar el id con el que se tiene en la base de datos de mongo
+            validarCampos
+        ],
         actualizarMedico 
      );
     
      router.delete('/:id',
+        validarJWT,
         borrarMedico
      );
     
