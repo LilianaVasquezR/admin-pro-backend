@@ -10,6 +10,20 @@
 # dependencies
 /node_modules
 
+
+# archivos con las siguientes extenciones en la carpeta uploads se ignoran 
+uploads/hospitales/**.jpg
+uploads/hospitales/**.png
+uploads/hospitales/**.gif
+
+uploads/usuarios/**.jpg
+uploads/usuarios/**.png
+uploads/usuarios/**.gif
+
+uploads/medicos/**.jpg
+uploads/medicos/**.png
+uploads/medicos/**.gif
+
 # profiling files
 chrome-profiler-events*.json
 speed-measure-plugin*.json
